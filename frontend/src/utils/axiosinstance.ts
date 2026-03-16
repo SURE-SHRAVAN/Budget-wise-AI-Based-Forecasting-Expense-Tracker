@@ -10,10 +10,12 @@ const axiosInstance = axios.create({
 // Attach JWT token automatically
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = sessionStorage.getItem("access");
+    const token = localStorage.getItem("access");
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)

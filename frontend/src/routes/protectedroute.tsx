@@ -6,12 +6,14 @@ interface Props {
 }
 
 const ProtectedRoute: React.FC<Props> = ({ children }) => {
-  const token = sessionStorage.getItem("access");
+  const token = localStorage.getItem("access");
 
+  // If no token → redirect to login
   if (!token) {
     return <Navigate to="/login" replace />;
   }
 
+  // If token exists → allow access
   return <>{children}</>;
 };
 

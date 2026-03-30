@@ -38,13 +38,13 @@ const Login = () => {
     setLoading(true);
     try {
       const res = await axios.post("http://127.0.0.1:8000/api/auth/login/", { email, password });
-      sessionStorage.setItem("access", res.data.access);
-      sessionStorage.setItem("refresh", res.data.refresh);
+      localStorage.setItem("access", res.data.access);
+      localStorage.setItem("refresh", res.data.refresh);
       const profile = await axios.get("http://127.0.0.1:8000/api/auth/profile/", {
         headers: { Authorization: `Bearer ${res.data.access}` },
       });
-      sessionStorage.setItem("user", JSON.stringify(profile.data));
-      navigate("/");
+      localStorage.setItem("user", JSON.stringify(profile.data));
+      navigate("/home");
     } catch (err: any) {
       setError(err.response?.data?.detail || "Invalid credentials");
       setLoading(false);

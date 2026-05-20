@@ -267,7 +267,7 @@ const Register = () => {
           {/* Logo */}
           <div className={`logo ${mounted ? "in" : ""}`}>
             <div className="lc" />
-            <span className="ln">Studio</span>
+            <span className="ln">BudgetWise-Analysis</span>
           </div>
 
           {/* Heading */}

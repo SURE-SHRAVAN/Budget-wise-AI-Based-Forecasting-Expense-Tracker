@@ -193,7 +193,7 @@ const Login = () => {
 
           <div className={`logo ${mounted ? "in" : ""}`}>
             <div className="logo-circle" />
-            <span className="logo-name">Studio</span>
+            <span className="logo-name">BudgetWise-Analysis</span>
           </div>
 
           <div className={`hdg ${mounted ? "in" : ""}`}>

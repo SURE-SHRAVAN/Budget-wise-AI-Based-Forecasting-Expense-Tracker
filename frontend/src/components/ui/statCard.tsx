@@ -1,17 +1,11 @@
-import React from "react";
+import { Card } from "./Card";
 
-interface Props {
-  title: string;
-  value: number;
-}
-
-const StatCard: React.FC<Props> = ({ title, value }) => {
-  return (
-    <div className="bg-white p-6 rounded-xl shadow">
-      <p className="text-sm text-gray-500">{title}</p>
-      <h2 className="text-2xl font-bold">${value}</h2>
-    </div>
-  );
-};
+const StatCard = ({ label, value, detail }: { label: string; value: string; detail?: string }) => (
+  <Card className="p-5">
+    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">{label}</p>
+    <p className="mt-3 text-3xl font-semibold text-white">{value}</p>
+    {detail && <p className="mt-2 text-sm text-zinc-400">{detail}</p>}
+  </Card>
+);
 
 export default StatCard;

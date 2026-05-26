@@ -3,11 +3,9 @@ from django.conf import settings
 
 
 class Transaction(models.Model):
-
-    TYPE_CHOICES = (
-        ("income", "Income"),
-        ("expense", "Expense"),
-    )
+    class Type(models.TextChoices):
+        INCOME = "income", "Income"
+        EXPENSE = "expense", "Expense"
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -21,15 +19,21 @@ class Transaction(models.Model):
 
     type = models.CharField(
         max_length=10,
-        choices=TYPE_CHOICES
+        choices=Type.choices
     )
 
     date = models.DateField()
 
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-date", "-created_at"]
+        indexes = [
+            models.Index(fields=["user", "date"]),
+            models.Index(fields=["user", "type"]),
+            models.Index(fields=["user", "category"]),
+        ]
 
     def __str__(self):
         return f"{self.user.email} | {self.type} | {self.amount}"

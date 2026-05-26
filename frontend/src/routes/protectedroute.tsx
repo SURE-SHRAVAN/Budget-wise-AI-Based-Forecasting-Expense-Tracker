@@ -1,20 +1,20 @@
-import { Navigate } from "react-router-dom";
-import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import type { ReactNode } from "react";
+import { useAuth } from "../context/authcontext";
 
-interface Props {
-  children: React.ReactNode;
-}
+const ProtectedRoute = ({ children }: { children?: ReactNode }) => {
+  const { loading, user } = useAuth();
 
-const ProtectedRoute: React.FC<Props> = ({ children }) => {
-  const token = localStorage.getItem("access");
-
-  // If no token → redirect to login
-  if (!token) {
-    return <Navigate to="/login" replace />;
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white grid place-items-center">
+        <div className="h-10 w-10 animate-spin rounded-full border border-white/20 border-t-white" />
+      </div>
+    );
   }
 
-  // If token exists → allow access
-  return <>{children}</>;
+  if (!user) return <Navigate to="/login" replace />;
+  return children ? <>{children}</> : <Outlet />;
 };
 
 export default ProtectedRoute;

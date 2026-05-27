@@ -1,12 +1,14 @@
 databases:
   # 1. PostgreSQL Database
   - name: budgetwise-db
+    plan: free
 
 services:
   # 2. Django Backend
   - type: web
     name: budgetwise-backend
     env: python
+    plan: free
     buildCommand: "./build.sh"
     startCommand: "gunicorn backend.wsgi:application"
     envVars:

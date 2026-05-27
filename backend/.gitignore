@@ -20,7 +20,6 @@ db.sqlite3-journal
 # Django specific
 *.log
 local_settings.py
-backend/settings.py
 
 # Static files
 staticfiles/

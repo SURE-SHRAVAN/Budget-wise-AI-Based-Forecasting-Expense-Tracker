@@ -14,9 +14,12 @@ from .serializers import (
 )
 
 
+from rest_framework.permissions import AllowAny, IsAuthenticated
+
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)

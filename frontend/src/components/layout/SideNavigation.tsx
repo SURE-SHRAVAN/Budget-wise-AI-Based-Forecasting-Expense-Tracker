@@ -12,14 +12,14 @@ const navItems = [
 ];
 
 export const SideNavigation = () => (
-  <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-white/10 bg-black/65 p-5 backdrop-blur-xl lg:block">
+  <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-line bg-white/80 p-5 backdrop-blur-xl lg:block">
     <NavLink to="/dashboard" className="flex items-center gap-3">
-      <div className="grid h-11 w-11 place-items-center rounded-lg bg-white text-black">
+      <div className="grid h-11 w-11 place-items-center rounded-lg bg-ink text-white shadow-md">
         <Landmark size={22} />
       </div>
       <div>
-        <p className="text-lg font-semibold tracking-tight">BudgetWise AI</p>
-        <p className="text-xs text-zinc-500">Financial intelligence</p>
+        <p className="text-lg font-semibold tracking-tight text-ink">BudgetWise AI</p>
+        <p className="text-xs text-graphite">Financial intelligence</p>
       </div>
     </NavLink>
 
@@ -28,7 +28,7 @@ export const SideNavigation = () => (
         <NavLink
           className={({ isActive }) =>
             `group flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition ${
-              isActive ? "bg-white text-black" : "text-zinc-400 hover:bg-white/10 hover:text-white"
+              isActive ? "bg-accent text-white shadow-md" : "text-graphite hover:bg-secondary hover:text-ink"
             }`
           }
           key={item.to}
@@ -40,12 +40,12 @@ export const SideNavigation = () => (
       ))}
     </nav>
 
-    <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/10 bg-white/[0.055] p-4">
-      <div className="flex items-center gap-2 text-sm font-semibold text-white">
-        <Sparkles size={16} />
+    <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-line bg-gradient-to-br from-mint/10 to-transparent p-4">
+      <div className="flex items-center gap-2 text-sm font-semibold text-ink">
+        <Sparkles size={16} className="text-mint" />
         AI insights active
       </div>
-      <p className="mt-2 text-xs leading-5 text-zinc-500">Personalized analysis runs on your private transaction context.</p>
+      <p className="mt-2 text-xs leading-5 text-graphite">Personalized analysis runs on your private transaction context.</p>
     </div>
   </aside>
 );

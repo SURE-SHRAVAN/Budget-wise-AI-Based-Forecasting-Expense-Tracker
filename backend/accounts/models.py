@@ -15,7 +15,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=20, choices=Role.choices, default=Role.USER)
     currency = models.CharField(max_length=8, default="INR")
-    theme = models.CharField(max_length=20, choices=Theme.choices, default=Theme.DARK)
+    theme = models.CharField(max_length=20, choices=Theme.choices, default=Theme.LIGHT)
     notifications_enabled = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -18,10 +18,10 @@ class AssistantService:
 
     def answer(self, prompt, conversation):
         Message.objects.create(conversation=conversation, role=Message.Role.USER, content=prompt)
-        if not settings.OPENAI_API_KEY:
+        if not settings.GEMINI_API_KEY:
             content = self._local_answer(prompt)
         else:
-            content = self._openai_answer(prompt, conversation)
+            content = self._gemini_answer(prompt, conversation)
 
         message = Message.objects.create(
             conversation=conversation,
@@ -32,25 +32,28 @@ class AssistantService:
         conversation.save(update_fields=["title", "updated_at"])
         return message
 
-    def _openai_answer(self, prompt, conversation):
-        from openai import OpenAI
+    def _gemini_answer(self, prompt, conversation):
+        import google.generativeai as genai
 
-        client = OpenAI(api_key=settings.OPENAI_API_KEY)
-        history = list(conversation.messages.order_by("-created_at")[:8])[::-1]
-        context = self.analytics.financial_context_text()
-        input_messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "developer", "content": f"Financial context for this user: {context}"},
-        ]
-        input_messages.extend({"role": message.role, "content": message.content} for message in history)
-        input_messages.append({"role": "user", "content": prompt})
-
-        response = client.responses.create(
-            model=settings.OPENAI_MODEL,
-            input=input_messages,
-            temperature=0.2,
+        genai.configure(api_key=settings.GEMINI_API_KEY)
+        model = genai.GenerativeModel(
+            settings.GEMINI_MODEL,
+            system_instruction=SYSTEM_PROMPT
         )
-        return response.output_text
+        
+        history = list(conversation.messages.order_by("created_at"))
+        chat_history = []
+        for msg in history[:-1]:  # Exclude the current prompt
+            role = "user" if msg.role == Message.Role.USER else "model"
+            chat_history.append({"role": role, "parts": [msg.content]})
+            
+        context = self.analytics.financial_context_text()
+        full_prompt = f"Financial context for this user: {context}\n\nUser request: {prompt}"
+        
+        chat = model.start_chat(history=chat_history)
+        response = chat.send_message(full_prompt)
+        
+        return response.text
 
     def _local_answer(self, prompt):
         report = self.analytics.report()

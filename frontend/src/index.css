@@ -1,53 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-  background: #050505;
-  font-family: Inter, system-ui, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html {
+    font-family: "Inter", system-ui, sans-serif;
+  }
+  body {
+    @apply bg-primary text-ink antialiased selection:bg-accent selection:text-white;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-platinum rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-graphite;
+  }
 }
 
-* {
-  box-sizing: border-box;
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-line rounded-2xl shadow-card;
+  }
+  .glass-panel {
+    @apply bg-white/60 backdrop-blur-xl border border-white/20 shadow-premium;
+  }
+  .btn-primary {
+    @apply bg-ink text-white px-4 py-2 rounded-lg hover:bg-graphite transition-all shadow-md active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-ink px-4 py-2 rounded-lg hover:bg-platinum transition-all active:scale-95 border border-line;
+  }
+  .input-field {
+    @apply w-full bg-secondary border border-line rounded-lg px-4 py-2 text-ink focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-all;
+  }
 }
 
-html {
-  min-width: 320px;
-  background: #050505;
-}
-
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-  background: #050505;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-::selection {
-  background: white;
-  color: black;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
-  border-radius: 999px;
+.ambient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.05), transparent 25%),
+              radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.05), transparent 25%);
 }

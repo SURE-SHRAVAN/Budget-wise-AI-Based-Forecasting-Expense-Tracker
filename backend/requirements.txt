@@ -6,6 +6,6 @@ django-filter>=25.1
 drf-spectacular>=0.28
 psycopg[binary]>=3.2
 python-dotenv>=1.1
-openai>=1.99
+google-generativeai>=0.8.3
 gunicorn>=23.0
 whitenoise>=6.9

@@ -3,10 +3,10 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-white text-black hover:bg-zinc-200 shadow-glow",
-  secondary: "bg-white/10 text-white border-white/15 hover:bg-white/15",
-  ghost: "bg-transparent text-zinc-300 hover:bg-white/10",
-  danger: "bg-red-500/15 text-red-200 border-red-400/20 hover:bg-red-500/25",
+  primary: "bg-ink text-white hover:bg-graphite shadow-md border-transparent",
+  secondary: "bg-secondary text-ink border-line hover:bg-platinum",
+  ghost: "bg-transparent text-graphite hover:bg-secondary hover:text-ink border-transparent",
+  danger: "bg-red-50 text-red-600 border-red-200 hover:bg-red-100",
 };
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {

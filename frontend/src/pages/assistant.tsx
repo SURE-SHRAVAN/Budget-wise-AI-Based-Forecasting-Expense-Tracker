@@ -58,12 +58,12 @@ const Assistant = () => {
       <div className="grid gap-5 xl:grid-cols-[1fr_360px]">
         <Card className="flex min-h-[680px] flex-col p-5">
           <div className="flex items-center gap-3 border-b border-white/10 pb-4">
-            <div className="grid h-11 w-11 place-items-center rounded-lg bg-white text-black">
+            <div className="grid h-11 w-11 place-items-center rounded-lg bg-accent text-white shadow-sm">
               <Bot size={21} />
             </div>
             <div>
-              <h2 className="font-semibold">BudgetWise Copilot</h2>
-              <p className="text-sm text-zinc-500">Context-aware financial Q&A</p>
+              <h2 className="font-semibold text-ink">BudgetWise Copilot</h2>
+              <p className="text-sm text-graphite">Context-aware financial Q&A</p>
             </div>
           </div>
 
@@ -71,11 +71,11 @@ const Assistant = () => {
             {messages.length ? (
               <div className="grid gap-4">
                 {messages.map((message) => (
-                  <div className={`max-w-[86%] rounded-lg p-4 ${message.role === "user" ? "ml-auto bg-white text-black" : "bg-white/10 text-zinc-100"}`} key={message.id}>
+                  <div className={`max-w-[86%] rounded-xl p-4 shadow-sm ${message.role === "user" ? "ml-auto bg-accent text-white" : "bg-white border border-line text-ink"}`} key={message.id}>
                     <p className="text-sm leading-6">{message.content}</p>
                   </div>
                 ))}
-                {loading && <div className="w-fit rounded-lg bg-white/10 p-4 text-sm text-zinc-400">Analyzing your financial context...</div>}
+                {loading && <div className="w-fit rounded-xl border border-line bg-white p-4 text-sm text-graphite shadow-sm">Analyzing your financial context...</div>}
                 <div ref={bottomRef} />
               </div>
             ) : (
@@ -93,21 +93,21 @@ const Assistant = () => {
 
         <aside className="grid gap-4 content-start">
           <Card className="p-5">
-            <div className="flex items-center gap-2">
-              <Sparkles size={18} />
+            <div className="flex items-center gap-2 text-ink">
+              <Sparkles size={18} className="text-accent" />
               <h2 className="font-semibold">Prompt starters</h2>
             </div>
             <div className="mt-4 grid gap-2">
               {starters.map((starter) => (
-                <button className="rounded-lg border border-white/10 bg-white/[0.055] p-3 text-left text-sm text-zinc-300 transition hover:bg-white/10" key={starter} onClick={() => send(starter)} type="button">
+                <button className="rounded-lg border border-line bg-secondary p-3 text-left text-sm text-graphite transition hover:bg-white hover:shadow-sm" key={starter} onClick={() => send(starter)} type="button">
                   {starter}
                 </button>
               ))}
             </div>
           </Card>
           <Card className="p-5">
-            <h2 className="font-semibold">How it works</h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-400">
+            <h2 className="font-semibold text-ink">How it works</h2>
+            <p className="mt-3 text-sm leading-6 text-graphite">
               The backend injects your aggregated financial context, recent insights, trends, and goals into a compact prompt. If no OpenAI key is configured, a deterministic local insight engine answers common questions.
             </p>
           </Card>

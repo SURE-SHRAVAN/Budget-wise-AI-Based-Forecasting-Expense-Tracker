@@ -54,10 +54,10 @@ const Dashboard = () => {
           <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 16 }} key={stat.label} transition={{ delay: index * 0.05 }}>
             <Card className="p-5">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500">{stat.label}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-graphite">{stat.label}</p>
                 <stat.icon className={stat.tone} size={20} />
               </div>
-              <p className={`mt-5 text-3xl font-semibold tracking-tight ${stat.tone}`}>{stat.value}</p>
+              <p className={`mt-5 text-3xl font-semibold tracking-tight text-ink`}>{stat.value}</p>
             </Card>
           </motion.div>
         ))}
@@ -95,10 +95,10 @@ const Dashboard = () => {
           <div className="grid gap-3">
             {report.insights.length ? (
               report.insights.slice(0, 4).map((insight) => (
-                <div className="rounded-lg border border-white/10 bg-black/30 p-4" key={insight.title}>
+                <div className="rounded-lg border border-line bg-secondary p-4" key={insight.title}>
                   <Badge tone={insight.severity === "info" ? "neutral" : insight.severity}>{insight.type}</Badge>
-                  <h3 className="mt-3 font-semibold">{insight.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">{insight.detail}</p>
+                  <h3 className="mt-3 font-semibold text-ink">{insight.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-graphite">{insight.detail}</p>
                 </div>
               ))
             ) : (
@@ -116,14 +116,14 @@ const Dashboard = () => {
           </div>
           <div className="grid gap-3">
             {transactions.slice(0, 6).map((transaction) => (
-              <div className="flex items-center justify-between gap-4 rounded-lg border border-white/10 bg-black/30 p-4" key={transaction.id}>
+              <div className="flex items-center justify-between gap-4 rounded-lg border border-line bg-secondary p-4" key={transaction.id}>
                 <div className="flex items-center gap-3">
-                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-white/10">
-                    <CreditCard size={18} />
+                  <div className="grid h-10 w-10 place-items-center rounded-lg bg-white shadow-sm border border-line">
+                    <CreditCard size={18} className="text-graphite" />
                   </div>
                   <div>
-                    <p className="font-semibold">{transaction.description}</p>
-                    <p className="text-xs text-zinc-500">
+                    <p className="font-semibold text-ink">{transaction.description}</p>
+                    <p className="text-xs text-graphite">
                       {transaction.category} · {formatDate(transaction.date)}
                     </p>
                   </div>
@@ -142,11 +142,11 @@ const Dashboard = () => {
       <section className="mt-5 grid gap-4 md:grid-cols-3">
         {goals.slice(0, 3).map((goal) => (
           <Card className="p-5" key={goal.id}>
-            <p className="font-semibold">{goal.name}</p>
-            <div className="mt-4 h-2 rounded-full bg-white/10">
-              <div className="h-full rounded-full bg-white" style={{ width: `${goal.progress_percentage}%` }} />
+            <p className="font-semibold text-ink">{goal.name}</p>
+            <div className="mt-4 h-2 rounded-full bg-platinum">
+              <div className="h-full rounded-full bg-accent" style={{ width: `${goal.progress_percentage}%` }} />
             </div>
-            <p className="mt-3 text-sm text-zinc-400">
+            <p className="mt-3 text-sm text-graphite">
               {goal.progress_percentage}% complete · {formatCurrency(goal.remaining_amount, user?.currency)} left
             </p>
           </Card>

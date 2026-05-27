@@ -1,9 +1,10 @@
-services:
+databases:
   # 1. PostgreSQL Database
-  - type: pgo
-    name: budgetwise-db
+  - name: budgetwise-db
     plan: free
+    region: ohio
 
+services:
   # 2. Django Backend
   - type: web
     name: budgetwise-backend
